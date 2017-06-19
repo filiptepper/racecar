@@ -128,4 +128,10 @@ describe Racecar::Config do
       }.to raise_exception(Racecar::ConfigError, "required configuration key `client_id` not defined")
     end
   end
+
+  describe "#inspect" do
+    it "returns an easy-to-read list of the configuration keys and values" do
+      expect(config.inspect).to eq "hello"
+    end
+  end
 end

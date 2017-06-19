@@ -28,6 +28,9 @@ module Racecar
       trap("QUIT") { consumer.stop }
       trap("INT") { consumer.stop }
 
+      # Print the consumer config to STDERR on USR1.
+      trap("USR1") { $stderr.puts config }
+
       config.subscriptions.each do |subscription|
         topic = subscription.topic
         start_from_beginning = subscription.start_from_beginning

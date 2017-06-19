@@ -59,6 +59,12 @@ module Racecar
       load_env!
     end
 
+    def inspect
+      ALLOWED_KEYS
+        .map {|key| [key, get(key).inspect].join(" = ") }
+        .join("\n")
+    end
+
     def validate!
       REQUIRED_KEYS.each do |key|
         if send(key).nil?
@@ -78,6 +84,10 @@ module Racecar
       data = processed.fetch(environment)
 
       load(data)
+    end
+
+    def get(key)
+      public_send(key)
     end
 
     def set(key, value)
